@@ -76,12 +76,10 @@
 
       var uid = new Date().getTime();
 
-      var iframe = $('<iframe src="javascript:false;" name="'+uid+'" style="display:none" />');
-      iframe.appendTo(document.body);
+      var iframe = $('<iframe src="javascript:false;" name="'+uid+'" style="display:none" />').appendTo(document.body);
       data.iframe = iframe;
       
-      var formClone = $(this).clone().attr('target', uid).attr('id', uid); //
-      formClone.appendTo(document.body);
+      var formClone = $(this).clone().attr('target', uid).appendTo(document.body);
       data.form = formClone;
 
       if (s.global && ! $.active++)
