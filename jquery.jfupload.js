@@ -49,7 +49,7 @@
       data.done = true;
 
       xhr = data.xhr;
-      xhr.responseXML = xhr.responseText = data.iframe.contents().find('body').text();
+      xhr.responseXML = xhr.responseText = data.iframe.contents().find('body').html();
 
       try {
         var ajaxData = $.httpData(xhr, s.dataType, s);
