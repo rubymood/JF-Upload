@@ -45,11 +45,20 @@
     }
 
     var uploadDone = function(e) {
+      var responseTag;
       var data = e.data;
       data.done = true;
 
-      xhr = data.xhr;
-      xhr.responseXML = xhr.responseText = data.iframe.contents().find('body').html();
+      var xhr = data.xhr;
+      var body = data.iframe.contents().find('body');
+      var pre = body.find('> pre');
+      
+      if (pre.size())
+        responseTag = pre;
+      else
+        responseTag = body;
+
+      xhr.responseXML = xhr.responseText = responseTag.html();
 
       try {
         var ajaxData = $.httpData(xhr, s.dataType, s);
@@ -76,20 +85,15 @@
 
       var uid = new Date().getTime();
 
-      var iframe = $('<iframe src="javascript:false;" name="'+uid+'" style="display:none" />').appendTo(document.body);
-      data.iframe = iframe;
+      data.iframe = $('<iframe src="javascript:false;" name="'+uid+'" style="display:none" />').appendTo(document.body).bind("load",  data, uploadDone);
       
-      var formClone = $(this).clone().attr('target', uid).appendTo(document.body);
-      data.form = formClone;
+      data.form = $(this).clone().attr('target', uid).appendTo(document.body).submit();
 
       if (s.global && ! $.active++)
         $.event.trigger("ajaxStart");
 
       if (s.global)
         $.event.trigger("ajaxSend", [data.xhr, s]);
-
-      iframe.bind("load",  data, uploadDone);
-      formClone.submit();
 
       if (s.timeout > 0) {
         setTimeout(function() {
