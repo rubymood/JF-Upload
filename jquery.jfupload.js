@@ -41,7 +41,7 @@
       setTimeout(function() {
         data.form.remove();
         data.iframe.remove();
-      }, 100);
+      }, 500);
     }
 
     var uploadDone = function(e) {
