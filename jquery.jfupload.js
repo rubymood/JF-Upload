@@ -87,7 +87,7 @@
 
       data.iframe = $('<iframe src="javascript:false;" name="'+uid+'" style="display:none" />').appendTo(document.body).bind("load",  data, uploadDone);
       
-      data.form = $(this).clone().attr('target', uid).appendTo(document.body).submit();
+      data.form = $(this).clone().attr('target', uid).css({display:'none'}).appendTo(document.body).submit();
 
       if (s.global && ! $.active++)
         $.event.trigger("ajaxStart");
