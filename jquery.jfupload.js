@@ -1,22 +1,28 @@
 /*
- * JFUpload
+ * JFUpload:
  *   file upload with iframe
  *   jQuery ajax events support (like ajaxComplete, ajaxError etc.)
- *   jQuery ajax options support (like success, error, dataType etc.)
+ *   jQuery ajax settings support (like success, error, dataType etc.)
  *   live support (if you use livequery plugin or jQuery 1.4alpha+)
+ *   small size (LOC ~ 100)
  *
  * Usage:
- *   $('#formId').JFUpload(options)
+ *   $('#formId').JFUpload(settings)
  *
- *   options: http://docs.jquery.com/Ajax/jQuery.ajax#options
+ *   settings: http://api.jquery.com/jQuery.ajax/
  *      default: {dataType: 'script'}
+ *
+ * Tested in:
+ *    Opera, Chrome, Firefox
+ *
+ *
  */
 
 (function($) {
 
-  $.fn.JFUpload = function(options) {
+  $.fn.JFUpload = function(settings) {
 
-    var s = $.extend($.ajaxSettings, {dataType: 'script'}, options);
+    var s = $.extend($.ajaxSettings, {dataType: 'script'}, settings);
 
     var uploadFail = function(data) {
       $.handleError(s, data.xhr, "error");
